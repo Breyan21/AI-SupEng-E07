@@ -6,6 +6,12 @@ AI Support Engine es una API backend para clasificar inteligentemente solicitude
 
 Desarrollado bajo una arquitectura modular desacoplada para trabajo en equipo de 3 integrantes.
 
+## Integrantes del equipo
+
+- **José Miguel Jiménez Enríquez**
+- **Eduardo Lezama Zarate**
+- **Breyan Sebastián Matías Lira**
+
 ## Requisitos
 
 - Node.js LTS (v20 o superior recomendado)
