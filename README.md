@@ -143,3 +143,30 @@ El repositorio cuenta con dos formatos de evidencia para evaluación:
   - Benchmark de 10 casos: [evidence/benchmark_10_cases.json](evidence/benchmark_10_cases.json) y [evidencias/evidencia_2_benchmark_comparativo.jpg](evidencias/evidencia_2_benchmark_comparativo.jpg)
   - Neutralización de seguridad: [evidence/security_adversarial_execution.json](evidence/security_adversarial_execution.json) y [evidencias/evidencia_5_api_seguridad_adversarial.jpg](evidencias/evidencia_5_api_seguridad_adversarial.jpg)
   - Resumen ejecutivo: [evidence/results_summary.json](evidence/results_summary.json)
+
+
+## Contribución y Evidencia Individual — Breyan Sebastián Matías Lira (Integrante 2)
+
+- **Rol y Responsabilidades:** Integrante 2 — Integración real de IA Generativa con Google Gemini, salida JSON estructurada, validación del contrato, manejo seguro de errores y protección de secretos.
+- **Rama desarrollada y autoría Git:**
+  - [`feat/generative-engine`](https://github.com/Breyan21/AI-SupEng-E07/tree/feat/generative-engine): implementación del motor generativo y su conexión con `POST /api/analyze`, integrada a `main` mediante el [PR #1](https://github.com/Breyan21/AI-SupEng-E07/pull/1).
+  - Commit principal de autoría: [`9bdf9a1`](https://github.com/Breyan21/AI-SupEng-E07/commit/9bdf9a1) — `feat: implement generative engine using Google Gemini API with structured JSON output`.
+- **Entregables y archivos clave de autoría:**
+  1. [`src/engines/generative.ts`](src/engines/generative.ts): integración con el SDK oficial `@google/genai`; instrucciones de sistema para categorizar solicitudes y redactar respuestas empáticas en español; uso nativo de `responseMimeType: application/json` y `responseSchema` para exigir los campos `category`, `priority`, `response` y `requiresHumanReview` sin envolturas Markdown. Añade validación defensiva con Zod, rechazo de respuestas vacías o JSON malformado, propagación contextualizada de errores del proveedor y una regla de respaldo que fuerza revisión humana en resultados `SECURITY` o `CRITICAL`.
+  2. [`src/controllers/analyze.controller.ts`](src/controllers/analyze.controller.ts): integración asíncrona del modo `generative` en el endpoint y degradación controlada mediante respuesta HTTP `502`, evitando que una excepción de Gemini derribe el servidor.
+  3. [`.env.example`](.env.example) y [`.gitignore`](.gitignore): configuración mediante `process.env.GEMINI_API_KEY`/`GEMINI_MODEL`, plantilla sin credenciales reales y exclusión de archivos `.env` con conservación explícita de `.env.example`.
+  4. [`tests/generative.test.ts`](tests/generative.test.ts): 9 pruebas unitarias del esquema, configuración de API key, errores de cuota/proveedor, JSON inválido, cumplimiento del contrato y escalamiento obligatorio a revisión humana.
+  5. [`package.json`](package.json): incorporación de las dependencias `@google/genai` y `dotenv` necesarias para el proveedor y la carga segura de configuración.
+- **Evidencias directas de implementación y ejecución:**
+  - Respuesta real del endpoint generativo y validación del esquema: [evidence/generative_execution.json](evidence/generative_execution.json) y [evidencias/evidencia_4_api_generativo.jpg](evidencias/evidencia_4_api_generativo.jpg).
+  - Pruebas automatizadas: [evidencias/evidencia_1_pruebas_unitarias.jpg](evidencias/evidencia_1_pruebas_unitarias.jpg). La verificación local actual finaliza con **9/9 pruebas del motor generativo** y **26/26 pruebas del proyecto** aprobadas.
+  - Compilación y tipado: [evidencias/evidencia_6_typecheck_y_build.jpg](evidencias/evidencia_6_typecheck_y_build.jpg); `npm run typecheck` finaliza sin errores.
+  - Caso individual de defensa reproducible:
+
+    ```bash
+    curl -X POST http://localhost:3000/api/analyze \
+      -H "Content-Type: application/json" \
+      -d '{"message":"La base de datos arroja timeout al guardar","mode":"generative"}'
+    ```
+
+- **Decisión técnica a defender:** Se utilizó el esquema de respuesta JSON nativo de Gemini como primera garantía estructural y Zod como segunda barrera de validación en el servidor. Esta defensa en profundidad conserva un contrato estable aunque el proveedor devuelva una respuesta vacía, malformada o fuera de los valores permitidos; las excepciones se transforman en errores HTTP controlados. La versión original de esta rama usó `gemini-1.5-flash`; la migración posterior a `gemini-2.5-flash` y los reintentos exponenciales para HTTP 429/503 pertenecen a la estabilización de Integrante 3.
