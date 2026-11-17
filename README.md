@@ -170,3 +170,34 @@ El repositorio cuenta con dos formatos de evidencia para evaluación:
     ```
 
 - **Decisión técnica a defender:** Se utilizó el esquema de respuesta JSON nativo de Gemini como primera garantía estructural y Zod como segunda barrera de validación en el servidor. Esta defensa en profundidad conserva un contrato estable aunque el proveedor devuelva una respuesta vacía, malformada o fuera de los valores permitidos; las excepciones se transforman en errores HTTP controlados. La versión original de esta rama usó `gemini-1.5-flash`; la migración posterior a `gemini-2.5-flash` y los reintentos exponenciales para HTTP 429/503 pertenecen a la estabilización de Integrante 3.
+
+## Contribución y Evidencia Individual — Eduardo Lezama Zarate (Integrante 1)
+
+- **Rol y responsabilidades:** Integrante 1 — Inicialización y arquitectura del proyecto, contratos compartidos en TypeScript, validación HTTP, motor tradicional de clasificación, servidor Express y preparación de los puntos de integración.
+- **Rama desarrollada y autoría Git:**
+  - `feat/api-and-traditional-engine`: implementación inicial de la API, el motor tradicional y las pruebas de los componentes propios.
+  - Commit principal de autoría: `7a138d0 feat: initialize API and traditional engine`.
+- **Entregables y archivos clave de autoría:**
+  1. [`src/types/index.ts`](src/types/index.ts): definición del contrato compartido mediante `Category`, `Priority`, `Mode`, `AnalyzeRequest` y `AnalyzeResponse`. Establece los tipos públicos para que ambos motores devuelvan la misma estructura sin campos adicionales innecesarios.
+  2. [`src/middleware/validator.ts`](src/middleware/validator.ts): implementación de validación con Zod. Comprueba que el cuerpo sea un objeto JSON, exige `message` como cadena no vacía con un máximo de 5,000 caracteres y acepta exclusivamente los modos `traditional` o `generative`. Las entradas inválidas producen respuestas HTTP 400 con detalles claros y sin exponer información interna.
+  3. [`src/engines/traditional.ts`](src/engines/traditional.ts): implementación del motor determinista sin servicios externos ni IA. Normaliza minúsculas, elimina acentos, reemplaza signos innecesarios y reduce espacios antes de analizar el texto.
+  4. Motor basado en reglas ponderadas: asigna puntuaciones a frases y palabras de ACCESS, BUG, FEATURE y SECURITY. Las frases completas reciben mayor peso que las palabras aisladas, se consideran señales de contexto y se utiliza el orden `SECURITY`, `BUG`, `ACCESS`, `FEATURE` para desempates consistentes. Esta estrategia reduce la clasificación incorrecta causada por palabras genéricas como `error`.
+  5. [`src/controllers/analyze.controller.ts`](src/controllers/analyze.controller.ts): preparación original del controlador para identificar el modo solicitado y delegar al motor correspondiente. Inicialmente dejó claramente controlado el modo generativo no integrado con HTTP 501 y conservó un punto provisional para activación de revisión humana.
+  6. [`src/app.ts`](src/app.ts): configuración modular de Express, procesamiento JSON y exposición de `POST /api/analyze`, manteniendo separados el servidor, la validación y la clasificación.
+  7. [`tests/traditional.test.ts`](tests/traditional.test.ts) y [`tests/validator.test.ts`](tests/validator.test.ts): pruebas de las categorías principales, prioridades, normalización con acentos, casos ambiguos, mensajes vacíos, modos inválidos, ausencia de campos y activación provisional de revisión humana.
+  8. [`package.json`](package.json), [`tsconfig.json`](tsconfig.json) y [`.gitignore`](.gitignore): scripts para desarrollo, compilación, ejecución, pruebas y comprobación de tipos; configuración de TypeScript estricto y exclusión de archivos locales o generados.
+- **Lógica de clasificación y prioridades:**
+  - ACCESS se asigna a solicitudes de inicio de sesión, credenciales, contraseñas o recuperación de cuenta.
+  - BUG se asigna a fallos funcionales como error 500, congelamiento, pantalla en blanco o cierres inesperados.
+  - FEATURE se asigna a mejoras, nuevas características, solicitudes de botones o implementaciones adicionales.
+  - SECURITY se asigna a vulnerabilidades, inyección SQL, accesos no autorizados, filtraciones y brechas.
+  - LOW corresponde principalmente a mejoras sin impacto operativo; MEDIUM a accesos comunes o fallos menores; HIGH a errores importantes o interrupciones; CRITICAL a exposición de datos o riesgos graves de seguridad.
+- **Decisión técnica a defender:** Se implementó un motor determinista de puntuación antes que una cadena rígida de condiciones. Esto permite combinar señales, explicar por qué se eligió una categoría y mantener criterios consistentes sin depender de servicios externos o respuestas simuladas. Las coincidencias exactas reciben más peso que términos aislados y no se promociona cualquier palabra de urgencia automáticamente a CRITICAL.
+- **Preparación de integraciones:** La estructura conserva el contrato común para que el motor generativo pueda sustituir o complementarse sin cambiar la respuesta pública. También dejó preparado el punto donde la revisión humana puede evaluar el resultado antes de enviarlo al usuario, mientras la defensa avanzada quedó asignada a Integrante 3.
+- **Evidencias directas de implementación y ejecución:**
+  - Pruebas unitarias propias para motor tradicional y validación con Zod.
+  - Verificación de TypeScript estricto mediante `npm run typecheck`.
+  - Compilación mediante `npm run build`.
+  - Comprobación del endpoint tradicional con HTTP 200.
+  - Comprobación de solicitudes inválidas con HTTP 400.
+  - Comportamiento temporal preparado para modo generativo no integrado, diferenciándolo de una simulación del motor real.
