@@ -145,13 +145,37 @@ async function runBenchmark(): Promise<void> {
     let generativeError: string | null = null;
 
     if (generativeEnabled) {
-      try {
-        // Pausa para evitar rate-limiting
-        await sleep(1200);
-        const raw = await classifyWithGenerativeAI(tc.message);
-        generativeResult = applyHumanReview(raw, tc.message);
-      } catch (e) {
-        generativeError = e instanceof Error ? e.message : String(e);
+      let attempts = 0;
+      const maxAttempts = 3;
+      while (attempts < maxAttempts) {
+        attempts++;
+        try {
+          if (tc.id > 1) {
+            await sleep(2000);
+          }
+          const raw = await classifyWithGenerativeAI(tc.message, { maxRetries: 2 });
+          generativeResult = applyHumanReview(raw, tc.message);
+          generativeError = null;
+          break;
+        } catch (e) {
+          generativeError = e instanceof Error ? e.message : String(e);
+          if (
+            (generativeError.includes('429') ||
+              generativeError.includes('RESOURCE_EXHAUSTED') ||
+              generativeError.includes('503') ||
+              generativeError.includes('UNAVAILABLE')) &&
+            attempts < maxAttempts
+          ) {
+            const matchSeconds = generativeError.match(/retry(?:Delay"| in )[:\s"]*([0-9\.]+)/i);
+            const waitSec = matchSeconds ? Math.ceil(parseFloat(matchSeconds[1])) + 2 : 15;
+            console.log(
+              `    ⏳ Límite de cuota / disponibilidad (429/503). Esperando ${waitSec}s para reintentar (intento ${attempts}/${maxAttempts})...`,
+            );
+            await sleep(waitSec * 1000);
+          } else {
+            break;
+          }
+        }
       }
     } else {
       generativeError = 'GEMINI_API_KEY no configurada';
@@ -248,3 +272,4 @@ runBenchmark().catch((err) => {
   console.error('Error fatal en el benchmark:', err);
   process.exit(1);
 });
+

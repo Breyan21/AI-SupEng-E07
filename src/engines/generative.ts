@@ -50,12 +50,13 @@ function getGeminiClient(): GoogleGenAI {
       'GEMINI_API_KEY no está configurada o contiene el valor por defecto. Configure una clave válida en el archivo .env',
     );
   }
-  return new GoogleGenAI({ apiKey });
+  return new GoogleGenAI({ apiKey, httpOptions: { apiVersion: 'v1beta' } });
 }
 
 export interface GenerativeEngineOptions {
   client?: GoogleGenAI;
   model?: string;
+  maxRetries?: number;
 }
 
 /**
@@ -66,46 +67,71 @@ export async function classifyWithGenerativeAI(
   message: string,
   options: GenerativeEngineOptions = {},
 ): Promise<AnalyzeResponse> {
-  const modelName = options.model ?? process.env.GEMINI_MODEL ?? 'gemini-1.5-flash';
+  let modelName = options.model ?? process.env.GEMINI_MODEL ?? 'gemini-2.5-flash';
+  if (modelName === 'gemini-2.0-flash') {
+    modelName = 'gemini-2.5-flash';
+  }
   const ai = options.client ?? getGeminiClient();
+  const maxRetries = options.maxRetries ?? 0;
 
   let rawText = '';
+  let attempt = 0;
 
-  try {
-    const apiResponse = await ai.models.generateContent({
-      model: modelName,
-      contents: message,
-      config: {
-        systemInstruction: SYSTEM_INSTRUCTION,
-        responseMimeType: 'application/json',
-        responseSchema: {
-          type: Type.OBJECT,
-          properties: {
-            category: {
-              type: Type.STRING,
-              enum: ['ACCESS', 'BUG', 'FEATURE', 'SECURITY'],
+  while (true) {
+    try {
+      const apiResponse = await ai.models.generateContent({
+        model: modelName,
+        contents: message,
+        config: {
+          systemInstruction: SYSTEM_INSTRUCTION,
+          responseMimeType: 'application/json',
+          responseSchema: {
+            type: Type.OBJECT,
+            properties: {
+              category: {
+                type: Type.STRING,
+                enum: ['ACCESS', 'BUG', 'FEATURE', 'SECURITY'],
+              },
+              priority: {
+                type: Type.STRING,
+                enum: ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'],
+              },
+              response: {
+                type: Type.STRING,
+              },
+              requiresHumanReview: {
+                type: Type.BOOLEAN,
+              },
             },
-            priority: {
-              type: Type.STRING,
-              enum: ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'],
-            },
-            response: {
-              type: Type.STRING,
-            },
-            requiresHumanReview: {
-              type: Type.BOOLEAN,
-            },
+            required: ['category', 'priority', 'response', 'requiresHumanReview'],
           },
-          required: ['category', 'priority', 'response', 'requiresHumanReview'],
         },
-      },
-    });
+      });
 
-    rawText = apiResponse.text?.trim() ?? '';
-  } catch (providerError: unknown) {
-    const errorMsg =
-      providerError instanceof Error ? providerError.message : String(providerError);
-    throw new Error(`Error en el proveedor de IA Generativa: ${errorMsg}`);
+      rawText = apiResponse.text?.trim() ?? '';
+      break;
+    } catch (providerError: unknown) {
+      const errorMsg =
+        providerError instanceof Error ? providerError.message : String(providerError);
+
+      if (
+        attempt < maxRetries &&
+        (errorMsg.includes('429') ||
+          errorMsg.includes('RESOURCE_EXHAUSTED') ||
+          errorMsg.includes('503') ||
+          errorMsg.includes('UNAVAILABLE'))
+      ) {
+        attempt++;
+        const matchSeconds = errorMsg.match(/retry(?:Delay"| in )[:\s"]*([0-9\.]+)/i);
+        const waitMs = matchSeconds
+          ? Math.ceil(parseFloat(matchSeconds[1])) * 1000 + 1500
+          : attempt * 5000;
+        await new Promise((r) => setTimeout(r, Math.min(waitMs, 60000)));
+        continue;
+      }
+
+      throw new Error(`Error en el proveedor de IA Generativa: ${errorMsg}`);
+    }
   }
 
   if (!rawText) {

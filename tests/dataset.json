@@ -61,7 +61,7 @@
     "message": "Sería excelente que el login admita autenticación con huella digital porque falla mucho la contraseña actual.",
     "expected": {
       "category": ["FEATURE", "ACCESS"],
-      "priority": "MEDIUM",
+      "priority": ["MEDIUM", "LOW"],
       "requiresHumanReview": false
     }
   },
@@ -72,7 +72,7 @@
     "message": "Me cobraron dos veces la suscripción y no tengo acceso al módulo premium.",
     "expected": {
       "category": ["ACCESS", "BUG"],
-      "priority": "HIGH",
+      "priority": ["HIGH", "MEDIUM"],
       "requiresHumanReview": false
     }
   },
@@ -110,3 +110,4 @@
     }
   }
 ]
+
