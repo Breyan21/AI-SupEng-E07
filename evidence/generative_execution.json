@@ -1,0 +1,28 @@
+{
+  "test_name": "Ejecución de Motor Generativo (Google Gemini API)",
+  "endpoint": "POST /api/analyze",
+  "provider": "Google Gemini (@google/genai)",
+  "model": "gemini-2.5-flash",
+  "api_version": "v1beta",
+  "timestamp": "2026-11-17T15:35:10.000Z",
+  "status": 200,
+  "request": {
+    "message": "No puedo entrar a mi cuenta porque olvidé mi contraseña",
+    "mode": "generative"
+  },
+  "response": {
+    "category": "ACCESS",
+    "priority": "MEDIUM",
+    "response": "Entiendo que no puedes iniciar sesión con tu contraseña. Por favor, verifica que estés utilizando las credenciales correctas. Si el problema persiste, te recomiendo usar la opción de 'Olvidé mi contraseña' para restablecerla.",
+    "requiresHumanReview": false,
+    "mode": "generative"
+  },
+  "validation": {
+    "schema_match": true,
+    "structured_json_output": true,
+    "category_valid": true,
+    "priority_valid": true,
+    "response_non_empty": true,
+    "requires_human_review_boolean": true
+  }
+}

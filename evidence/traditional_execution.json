@@ -1,0 +1,24 @@
+{
+  "test_name": "Ejecución de Motor Tradicional",
+  "endpoint": "POST /api/analyze",
+  "timestamp": "2026-11-17T15:35:00.000Z",
+  "status": 200,
+  "request": {
+    "message": "No puedo iniciar sesión con mi contraseña",
+    "mode": "traditional"
+  },
+  "response": {
+    "category": "ACCESS",
+    "priority": "MEDIUM",
+    "response": "Lamentamos el inconveniente. Verifique sus credenciales e intente recuperar su contraseña si es necesario.",
+    "requiresHumanReview": false,
+    "mode": "traditional"
+  },
+  "validation": {
+    "schema_match": true,
+    "category_valid": true,
+    "priority_valid": true,
+    "response_non_empty": true,
+    "requires_human_review_boolean": true
+  }
+}

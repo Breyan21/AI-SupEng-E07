@@ -105,3 +105,22 @@ Ejecución del dataset de 10 casos de prueba (`npm run test:compare`):
 ## Conclusión Técnica
 
 La arquitectura híbrida implementada demuestra que ambos enfoques se complementan de forma ideal. El motor tradicional ofrece latencia nula y predictibilidad determinista para solicitudes operativas frecuentes sin costo computacional. Por su parte, el motor generativo (Google Gemini) destaca por su empatía conversacional y comprensión semántica profunda en solicitudes con matices complejos. No obstante, la capa de seguridad determinista (`human-review`) es indispensable: neutraliza ataques adversariales (*prompt injection* y *jailbreaks*) que ningún LLM debe resolver de forma aislada, garantizando escalamiento inmediato a revisión humana en incidentes críticos.
+
+## Entregables y Evidencias
+
+El repositorio cuenta con dos formatos de evidencia para evaluación:
+
+### 1. Formato JSON (`evidence/`)
+- `evidence/traditional_execution.json`: Evidencia de ejecución real del motor tradicional.
+- `evidence/generative_execution.json`: Evidencia de ejecución real del motor generativo con Gemini.
+- `evidence/security_adversarial_execution.json`: Evidencia de neutralización de Prompt Injection / Jailbreak.
+- `evidence/benchmark_10_cases.json`: Dataset completo de 10 casos evaluados con resultados de ambos motores.
+- `evidence/results_summary.json`: Resumen ejecutivo de entregables, métricas y conclusión.
+
+### 2. Formato Capturas JPG (`evidencias/`)
+- `evidencias/evidencia_1_pruebas_unitarias.jpg`: 26/26 pruebas unitarias pasadas.
+- `evidencias/evidencia_2_benchmark_comparativo.jpg`: Salida de terminal del benchmark y tabla comparativa.
+- `evidencias/evidencia_3_api_tradicional.jpg`: Petición curl y respuesta JSON tradicional.
+- `evidencias/evidencia_4_api_generativo.jpg`: Petición curl y respuesta JSON generativa con IA.
+- `evidencias/evidencia_5_api_seguridad_adversarial.jpg`: Petición adversarial neutralizada con `requiresHumanReview: true`.
+- `evidencias/evidencia_6_typecheck_y_build.jpg`: Compilación limpia sin errores.
