@@ -1,0 +1,55 @@
+{
+  "project": "AI Support Engine (Clasificación Inteligente de Solicitudes de Soporte)",
+  "team": "Equipo 07",
+  "members": [
+    {
+      "name": "José Miguel Jiménez Enríquez",
+      "role": "Integrante 3 — Seguridad (human-review), Dataset, Benchmark, Estabilización y Documentación",
+      "branches": ["feat/security-and-benchmarking", "fix/generative-and-benchmark"]
+    },
+    {
+      "name": "Eduardo Lezama Zarate",
+      "role": "Integrante 1 — Arquitectura de API, Contratos de tipos y Motor Tradicional",
+      "branches": ["feat/api-and-traditional-engine"]
+    },
+    {
+      "name": "Breyan Sebastián Matías Lira",
+      "role": "Integrante 2 — Integración de IA Generativa con Google Gemini y Structured JSON",
+      "branches": ["feat/generative-engine"]
+    }
+  ],
+  "repository": "https://github.com/Breyan21/AI-SupEng-E07",
+  "stack": {
+    "runtime": "Node.js (v20+)",
+    "language": "TypeScript 5.7",
+    "server": "Express 4.21",
+    "ai_provider": "Google Gemini (@google/genai)",
+    "ai_model": "gemini-2.5-flash",
+    "validation": "Zod 3.23",
+    "testing": "Vitest 2.1"
+  },
+  "deliverables": {
+    "repository_code_and_readme": {
+      "status": "COMPLETED",
+      "detail": "Código modular en TypeScript con instrucciones completas en README.md"
+    },
+    "evidence_both_engines": {
+      "status": "COMPLETED",
+      "traditional": "evidence/traditional_execution.json",
+      "generative": "evidence/generative_execution.json"
+    },
+    "evidence_10_cases": {
+      "status": "COMPLETED",
+      "file": "evidence/benchmark_10_cases.json",
+      "dataset": "tests/dataset.json",
+      "script": "tests/benchmark.ts"
+    },
+    "table_and_technical_conclusion": {
+      "status": "COMPLETED",
+      "traditional_score": "10/10 (100%)",
+      "generative_score": "10/10 (100%)",
+      "conclusion_word_count": 83,
+      "conclusion": "La arquitectura híbrida implementada demuestra que ambos enfoques se complementan de forma ideal. El motor tradicional ofrece latencia nula y predictibilidad determinista para solicitudes operativas frecuentes sin costo computacional. Por su parte, el motor generativo (Google Gemini) destaca por su empatía conversacional y comprensión semántica profunda en solicitudes con matices complejos. No obstante, la capa de seguridad determinista (human-review) es indispensable: neutraliza ataques adversariales (prompt injection y jailbreaks) que ningún LLM debe resolver de forma aislada, garantizando escalamiento inmediato a revisión humana en incidentes críticos."
+    }
+  }
+}

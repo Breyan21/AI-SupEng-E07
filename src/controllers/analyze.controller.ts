@@ -12,7 +12,7 @@ export async function analyzeController(req: Request, res: Response): Promise<vo
     let result: AnalyzeResponse;
 
     if (mode === 'generative') {
-      result = await classifyWithGenerativeAI(message, { maxRetries: 1 });
+      result = await classifyWithGenerativeAI(message, { maxRetries: 2 });
     } else {
       result = classifySupportRequest(message, mode);
     }
