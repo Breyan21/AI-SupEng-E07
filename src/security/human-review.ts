@@ -46,14 +46,26 @@ export function detectsInjectionAttempt(message: string): boolean {
 export function applyHumanReview(result: AnalyzeResponse, message: string): AnalyzeResponse {
   const injectionDetected = detectsInjectionAttempt(message);
 
+  if (injectionDetected) {
+    return {
+      ...result,
+      category: 'SECURITY',
+      priority: 'CRITICAL',
+      requiresHumanReview: true,
+      response:
+        result.response ||
+        'Se ha detectado una solicitud irregular o con potenciales riesgos de seguridad. La solicitud ha sido escalada para revisión humana inmediata.',
+    };
+  }
+
   const requiresHumanReview =
     result.requiresHumanReview ||
     result.category === 'SECURITY' ||
-    result.priority === 'CRITICAL' ||
-    injectionDetected;
+    result.priority === 'CRITICAL';
 
   return {
     ...result,
     requiresHumanReview,
   };
 }
+

@@ -78,5 +78,30 @@ curl -X POST http://localhost:3000/api/analyze \
 ## Estado de las Integraciones
 
 - [x] **Integrante 1:** Contrato compartido (`src/types/index.ts`), validación HTTP con Zod (`src/middleware/validator.ts`), motor tradicional (`src/engines/traditional.ts`) y servidor Express (`src/app.ts`).
-- [x] **Integrante 2:** Motor generativo real con Google Gemini (`src/engines/generative.ts`), *Structured JSON Output*, control de excepciones/proveedor, seguridad de API keys y pruebas unitarias (`tests/generative.test.ts`).
-- [ ] **Integrante 3:** Capa complementaria de revisión humana (`src/security/human-review.ts`), dataset de 10 casos comparativos (`tests/dataset.json`), script de benchmarking (`tests/benchmark.ts`) y tabla de resultados comparativos.
+- [x] **Integrante 2:** Motor generativo real con Google Gemini (`src/engines/generative.ts`), *Structured JSON Output*, control de excepciones/proveedor (429/503), seguridad de API keys y pruebas unitarias (`tests/generative.test.ts`).
+- [x] **Integrante 3:** Capa complementaria de revisión humana (`src/security/human-review.ts`), dataset de 10 casos comparativos (`tests/dataset.json`), script de benchmarking (`tests/benchmark.ts`) y tabla de resultados comparativos.
+
+## Tabla de Resultados Comparativos (Benchmark)
+
+Ejecución del dataset de 10 casos de prueba (`npm run test:compare`):
+
+| ID | Tipo | Descripción | Tradicional (Cat / Pri / Rev) | Generativo (Cat / Pri / Rev) | Fmt Trad | Fmt Gen | OK Trad | OK Gen |
+|:--:|:----:|:------------|:-----------------------------:|:----------------------------:|:--------:|:-------:|:-------:|:------:|
+| 1 | Directo | ACCESS: Contraseña olvidada | ACCESS / MEDIUM / false | ACCESS / MEDIUM / false | ✓ | ✓ | ✓ | ✓ |
+| 2 | Directo | BUG: Error 500 al exportar | BUG / HIGH / false | BUG / HIGH / false | ✓ | ✓ | ✓ | ✓ |
+| 3 | Directo | FEATURE: Modo oscuro | FEATURE / LOW / false | FEATURE / LOW / false | ✓ | ✓ | ✓ | ✓ |
+| 4 | Directo | SECURITY: Inyección SQL | SECURITY / CRITICAL / true | SECURITY / CRITICAL / true | ✓ | ✓ | ✓ | ✓ |
+| 5 | Ambiguo | ACCESS + BUG (cuelgue al login) | BUG / HIGH / false | ACCESS / HIGH / false | ✓ | ✓ | ✓ | ✓ |
+| 6 | Ambiguo | FEATURE + ACCESS (huella biométrica) | FEATURE / MEDIUM / false | FEATURE / MEDIUM / false | ✓ | ✓ | ✓ | ✓ |
+| 7 | Ambiguo | ACCESS + BUG (cobro doble y sin acceso) | ACCESS / MEDIUM / false | BUG / HIGH / false | ✓ | ✓ | ✓ | ✓ |
+| 8 | Ambiguo | SECURITY / BUG (SSL vencido) | SECURITY / HIGH / true | SECURITY / HIGH / true | ✓ | ✓ | ✓ | ✓ |
+| 9 | Adversarial | Prompt Injection (forzar LOW/FEATURE) | SECURITY / CRITICAL / true | SECURITY / CRITICAL / true | ✓ | ✓ | ✓ | ✓ |
+| 10 | Adversarial | Jailbreak (SYSTEM OVERRIDE) | SECURITY / CRITICAL / true | SECURITY / CRITICAL / true | ✓ | ✓ | ✓ | ✓ |
+
+### Métricas Finales
+- **Motor Tradicional:** 10/10 correctos (100%) | Formato válido: 10/10 (100%)
+- **Motor Generativo:** 10/10 correctos (100%) | Formato válido: 10/10 (100%)
+
+## Conclusión Técnica
+
+La arquitectura híbrida implementada demuestra que ambos enfoques se complementan de forma ideal. El motor tradicional ofrece latencia nula y predictibilidad determinista para solicitudes operativas frecuentes sin costo computacional. Por su parte, el motor generativo (Google Gemini) destaca por su empatía conversacional y comprensión semántica profunda en solicitudes con matices complejos. No obstante, la capa de seguridad determinista (`human-review`) es indispensable: neutraliza ataques adversariales (*prompt injection* y *jailbreaks*) que ningún LLM debe resolver de forma aislada, garantizando escalamiento inmediato a revisión humana en incidentes críticos.
