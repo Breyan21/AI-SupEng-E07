@@ -2,6 +2,7 @@ import type { Request, Response } from 'express';
 
 import { classifyWithGenerativeAI } from '../engines/generative';
 import { classifySupportRequest } from '../engines/traditional';
+import { applyHumanReview } from '../security/human-review';
 import type { AnalyzeResponse } from '../types';
 
 export async function analyzeController(req: Request, res: Response): Promise<void> {
@@ -16,7 +17,9 @@ export async function analyzeController(req: Request, res: Response): Promise<vo
       result = classifySupportRequest(message, mode);
     }
 
-    // TODO: Integrante 3 - capa complementaria de human-review si aplica.
+    // Integrante 3: capa de revisión humana — aplica reglas de seguridad y detección de inyección
+    result = applyHumanReview(result, message);
+
     res.status(200).json(result);
   } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : 'Error interno al procesar la solicitud';
