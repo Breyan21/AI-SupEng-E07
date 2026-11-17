@@ -2,9 +2,21 @@
   "project": "AI Support Engine (Clasificación Inteligente de Solicitudes de Soporte)",
   "team": "Equipo 07",
   "members": [
-    "José Miguel Jiménez Enríquez",
-    "Eduardo Lezama Zarate",
-    "Breyan Sebastián Matías Lira"
+    {
+      "name": "José Miguel Jiménez Enríquez",
+      "role": "Integrante 3 — Seguridad (human-review), Dataset, Benchmark, Estabilización y Documentación",
+      "branches": ["feat/security-and-benchmarking", "fix/generative-and-benchmark"]
+    },
+    {
+      "name": "Eduardo Lezama Zarate",
+      "role": "Integrante 1 — Arquitectura de API, Contratos de tipos y Motor Tradicional",
+      "branches": ["feat/api-and-traditional-engine"]
+    },
+    {
+      "name": "Breyan Sebastián Matías Lira",
+      "role": "Integrante 2 — Integración de IA Generativa con Google Gemini y Structured JSON",
+      "branches": ["feat/generative-engine"]
+    }
   ],
   "repository": "https://github.com/Breyan21/AI-SupEng-E07",
   "stack": {

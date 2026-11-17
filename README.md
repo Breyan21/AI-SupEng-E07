@@ -8,9 +8,9 @@ Desarrollado bajo una arquitectura modular desacoplada para trabajo en equipo de
 
 ## Integrantes del equipo
 
-- **José Miguel Jiménez Enríquez**
-- **Eduardo Lezama Zarate**
-- **Breyan Sebastián Matías Lira**
+- **José Miguel Jiménez Enríquez** — *Integrante 3:* Seguridad (`human-review`), Dataset de pruebas, Benchmarking y Documentación.
+- **Eduardo Lezama Zarate** — *Integrante 1:* Arquitectura de API, Contratos de tipos y Motor Tradicional.
+- **Breyan Sebastián Matías Lira** — *Integrante 2:* Integración de IA Generativa con Google Gemini y Structured Outputs.
 
 ## Requisitos
 
@@ -124,3 +124,22 @@ El repositorio cuenta con dos formatos de evidencia para evaluación:
 - `evidencias/evidencia_4_api_generativo.jpg`: Petición curl y respuesta JSON generativa con IA.
 - `evidencias/evidencia_5_api_seguridad_adversarial.jpg`: Petición adversarial neutralizada con `requiresHumanReview: true`.
 - `evidencias/evidencia_6_typecheck_y_build.jpg`: Compilación limpia sin errores.
+
+---
+
+## Contribución y Evidencia Individual — José Miguel Jiménez Enríquez (Integrante 3)
+
+- **Rol y Responsabilidades:** Integrante 3 — Seguridad (`human-review`), Dataset comparativo, Benchmarking y Estabilización General del Sistema.
+- **Ramas desarrolladas y autoría Git:**
+  - `feat/security-and-benchmarking`: Implementación inicial de la capa de seguridad, dataset de 10 casos y script de benchmarking.
+  - `fix/generative-and-benchmark`: Actualización de compatibilidad de Gemini a `gemini-2.5-flash` (`v1beta`), sistema de resiliencia con reintentos exponenciales ante cuotas (HTTP 429/503), neutralización transversal de ataques adversariales y generación de evidencias JSON/JPG.
+- **Entregables y archivos clave de autoría:**
+  1. `src/security/human-review.ts`: Reglas de inspección de seguridad, antievasión y detección de patrones de manipulación (*Prompt Injection* / *Jailbreak*), activando `requiresHumanReview: true` y escalando a prioridad crítica.
+  2. `tests/dataset.json`: Definición exhaustiva de 10 casos de prueba (4 directos, 4 ambiguos y 2 adversariales) con sus criterios esperados de categoría y prioridad.
+  3. `tests/benchmark.ts`: Script automatizado de benchmarking (`npm run test:compare`) que evalúa ambos motores de extremo a extremo, calcula métricas de formato y acierto en tiempo real, e imprime la tabla comparativa.
+  4. `evidence/` y `evidencias/`: Generación de todas las evidencias en formato JSON estructurado y capturas de terminal JPG en alta resolución para la entrega.
+  5. `README.md`: Documentación técnica, tabla de resultados y redacción de la conclusión técnica comparativa.
+- **Evidencias directas de ejecución:**
+  - Benchmark de 10 casos: [evidence/benchmark_10_cases.json](evidence/benchmark_10_cases.json) y [evidencias/evidencia_2_benchmark_comparativo.jpg](evidencias/evidencia_2_benchmark_comparativo.jpg)
+  - Neutralización de seguridad: [evidence/security_adversarial_execution.json](evidence/security_adversarial_execution.json) y [evidencias/evidencia_5_api_seguridad_adversarial.jpg](evidencias/evidencia_5_api_seguridad_adversarial.jpg)
+  - Resumen ejecutivo: [evidence/results_summary.json](evidence/results_summary.json)
