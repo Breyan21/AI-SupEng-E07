@@ -12,9 +12,9 @@ export const analyzeRequestSchema = z.object({
     .trim()
     .min(1, 'message cannot be empty or whitespace only')
     .max(5000, 'message exceeds the maximum length of 5000 characters'),
-  mode: z.enum(['traditional', 'generative'], {
+  mode: z.enum(['traditional', 'generative', 'ml'], {
     errorMap: () => ({
-      message: 'mode must be either "traditional" or "generative"',
+      message: 'mode must be "traditional", "generative", or "ml"',
     }),
   }),
 });

@@ -12,6 +12,15 @@ describe('validator', () => {
     expect(parsed.success).toBe(true);
   });
 
+  it('accepts ML mode', () => {
+    const parsed = analyzeRequestSchema.safeParse({
+      message: 'No puedo entrar a mi cuenta',
+      mode: 'ml',
+    });
+
+    expect(parsed.success).toBe(true);
+  });
+
   it('rejects empty messages', () => {
     const parsed = analyzeRequestSchema.safeParse({
       message: '   ',
