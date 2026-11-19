@@ -1,0 +1,201 @@
+message,category
+"No puedo iniciar sesión desde esta mañana",ACCESS
+"Olvidé mi contraseña y no recibo el correo de recuperación",ACCESS
+"El sistema indica contraseña incorrecta aunque escribo la correcta",ACCESS
+"Mi cuenta quedó bloqueada tras varios intentos fallidos",ACCESS
+"No puedo entrar al portal de soporte",ACCESS
+"El enlace para restablecer mi contraseña expiró",ACCESS
+"La autenticación de dos factores no acepta mi código",ACCESS
+"No me llega el código de verificación al celular",ACCESS
+"Perdí acceso al correo asociado a mi cuenta",ACCESS
+"Necesito recuperar el acceso a mi perfil",ACCESS
+"Mi usuario no es reconocido al iniciar sesión",ACCESS
+"La aplicación me devuelve a la pantalla de inicio de sesión",ACCESS
+"No puedo ingresar desde un navegador nuevo",ACCESS
+"El sistema rechaza mis credenciales corporativas",ACCESS
+"No tengo permiso para abrir el módulo de facturación",ACCESS
+"Mi cuenta fue desactivada por error",ACCESS
+"El cambio de contraseña no se guarda",ACCESS
+"No puedo cerrar la sesión de otro dispositivo",ACCESS
+"La sesión termina inmediatamente después de entrar",ACCESS
+"El inicio de sesión con SSO falla para mi usuario",ACCESS
+"Necesito habilitar una cuenta de un nuevo empleado",ACCESS
+"Mi usuario aparece como inexistente en el directorio",ACCESS
+"No puedo acceder con la contraseña temporal",ACCESS
+"El correo de recuperación llegó pero el enlace no funciona",ACCESS
+"La clave temporal venció antes de poder iniciar sesión",ACCESS
+"No veo la opción para iniciar sesión en el portal",ACCESS
+"La aplicación solicita autenticación cada vez que cambio de página",ACCESS
+"No puedo desbloquear mi cuenta desde el portal",ACCESS
+"Mi token de autenticación no genera códigos válidos",ACCESS
+"El acceso al panel administrativo está denegado para mi rol",ACCESS
+"No recibí la invitación para activar mi cuenta",ACCESS
+"El sistema no reconoce mi huella para autenticarme",ACCESS
+"El código enviado por SMS llega tarde y expira",ACCESS
+"No puedo entrar con mi cuenta de empresa desde casa",ACCESS
+"Mi perfil perdió permisos para consultar reportes",ACCESS
+"La opción de recuperar contraseña no envía ningún mensaje",ACCESS
+"No puedo completar la verificación de identidad",ACCESS
+"La autenticación con certificado rechaza mi usuario",ACCESS
+"La cuenta aparece pendiente de activación",ACCESS
+"Me aparece acceso restringido al iniciar sesión",ACCESS
+"No puedo vincular mi cuenta con el inicio federado",ACCESS
+"El cambio de correo dejó mi acceso bloqueado",ACCESS
+"El sistema no mantiene mi sesión iniciada",ACCESS
+"No puedo iniciar sesión después de cambiar de dispositivo",ACCESS
+"Mi usuario no tiene acceso al espacio del equipo",ACCESS
+"Necesito restablecer las credenciales de mi cuenta",ACCESS
+"No puedo aceptar la invitación porque el inicio de sesión falla",ACCESS
+"El portal me pide una contraseña que nunca configuré",ACCESS
+"No tengo autorización para entrar al módulo premium",ACCESS
+"La recuperación de cuenta no reconoce mi correo",ACCESS
+"La página muestra error 500 al guardar el formulario",BUG
+"La aplicación se congela al cargar el historial",BUG
+"La pantalla queda en blanco después de exportar un PDF",BUG
+"El programa se cierra al abrir el panel de reportes",BUG
+"El botón Guardar no conserva los cambios",BUG
+"La búsqueda devuelve resultados duplicados por un fallo",BUG
+"El reporte mensual muestra cantidades incorrectas",BUG
+"El sistema genera un error al descargar archivos",BUG
+"La página tarda y luego deja de responder",BUG
+"La aplicación falla al subir un documento válido",BUG
+"El proceso de facturación se detiene antes de finalizar",BUG
+"El formulario marca error aunque todos los campos están completos",BUG
+"El filtro de fechas produce una pantalla vacía inesperada",BUG
+"El panel deja de actualizar los datos al refrescar",BUG
+"La aplicación se cierra al intentar imprimir un informe",BUG
+"El sistema no calcula correctamente el total de la factura",BUG
+"Al adjuntar una imagen aparece un error inesperado",BUG
+"El menú desaparece después de cambiar el idioma",BUG
+"El botón de regresar deja la página bloqueada",BUG
+"La exportación a Excel termina con un error 500",BUG
+"El sistema duplica una solicitud cuando pulso enviar una vez",BUG
+"La tabla no ordena las filas correctamente",BUG
+"El formulario pierde los datos después de mostrar un error",BUG
+"La aplicación se congela al generar un informe grande",BUG
+"El proceso de carga queda detenido en cero por ciento",BUG
+"El panel muestra una excepción al abrir un registro",BUG
+"El enlace de descarga entrega un archivo vacío",BUG
+"La página no carga los comentarios de un caso",BUG
+"La vista móvil se desordena al abrir el detalle",BUG
+"La aplicación calcula mal el impuesto en una factura",BUG
+"El sistema no actualiza el estado después de cerrar un ticket",BUG
+"El botón eliminar provoca un error interno",BUG
+"El calendario no permite seleccionar el último día del mes",BUG
+"La aplicación se cierra al cambiar rápidamente entre pestañas",BUG
+"El reporte presenta caracteres dañados al descargarlo",BUG
+"El sistema registra dos veces el mismo movimiento",BUG
+"La pantalla permanece cargando después de enviar el formulario",BUG
+"La función de búsqueda falla con nombres que contienen acentos",BUG
+"El botón de edición abre un registro diferente",BUG
+"El sistema muestra una fecha incorrecta en el historial",BUG
+"La carga masiva se detiene y no indica qué fila falló",BUG
+"El gráfico desaparece al cambiar el rango de fechas",BUG
+"El servicio devuelve error al consultar una solicitud existente",BUG
+"La aplicación no guarda los cambios del perfil",BUG
+"La pantalla de resumen muestra un valor total incorrecto",BUG
+"La página se congela al mostrar muchos resultados",BUG
+"El sistema rechaza un archivo que cumple el formato permitido",BUG
+"La aplicación devuelve datos incompletos al abrir un caso",BUG
+"El botón cancelar no detiene la operación en curso",BUG
+"El proceso automático termina antes de completar la actualización",BUG
+"Sería útil agregar un modo oscuro al panel",FEATURE
+"Quisiera poder descargar los reportes en formato Excel",FEATURE
+"Necesitamos una opción para programar informes semanales",FEATURE
+"Me gustaría recibir notificaciones cuando cambie el estado de un ticket",FEATURE
+"Sería conveniente agregar filtros por prioridad en la bandeja",FEATURE
+"Solicito una vista de calendario para las tareas",FEATURE
+"Podrían incluir búsqueda por número de factura",FEATURE
+"Queremos exportar los tickets como archivos CSV",FEATURE
+"Sería bueno añadir etiquetas personalizadas para los casos",FEATURE
+"Necesito una función para asignar varios tickets al mismo agente",FEATURE
+"Podrían habilitar comentarios internos entre los agentes",FEATURE
+"Me gustaría ver el historial de cambios de cada solicitud",FEATURE
+"Sería práctico configurar respuestas rápidas para preguntas frecuentes",FEATURE
+"Solicito una opción para adjuntar varios archivos a la vez",FEATURE
+"Queremos incluir una vista compacta de la lista de tickets",FEATURE
+"Sería útil filtrar solicitudes por equipo responsable",FEATURE
+"Me gustaría que el panel permita personalizar sus columnas",FEATURE
+"Podrían agregar autenticación con huella digital como opción",FEATURE
+"Necesitamos integrar el calendario con Google Calendar",FEATURE
+"Sería conveniente incluir una vista de métricas por agente",FEATURE
+"Quiero poder guardar filtros de búsqueda favoritos",FEATURE
+"Podrían agregar la opción de duplicar un ticket existente",FEATURE
+"Sería bueno permitir programar el envío de notificaciones",FEATURE
+"Necesitamos un campo para registrar el número de pedido",FEATURE
+"Me gustaría cambiar el idioma desde el perfil",FEATURE
+"Solicito una opción para archivar varias solicitudes juntas",FEATURE
+"Sería práctico agregar un botón para copiar el enlace del ticket",FEATURE
+"Podrían incluir una vista previa de archivos adjuntos",FEATURE
+"Queremos recibir un resumen diario de casos pendientes",FEATURE
+"Sería útil añadir un campo de etiquetas a los clientes",FEATURE
+"Me gustaría crear plantillas para solicitudes recurrentes",FEATURE
+"Necesitamos permitir que los usuarios prioricen sus propios tickets",FEATURE
+"Podrían incorporar un gráfico de solicitudes por categoría",FEATURE
+"Solicito poder descargar adjuntos desde la lista de casos",FEATURE
+"Sería bueno agregar una opción para ocultar columnas",FEATURE
+"Quiero poder asignar fechas límite a las solicitudes",FEATURE
+"Podrían añadir una vista de tablero para organizar tareas",FEATURE
+"Nos gustaría incluir notas privadas en el perfil del cliente",FEATURE
+"Sería útil integrar el sistema con Slack para las notificaciones",FEATURE
+"Solicito una opción para filtrar por fecha de última actividad",FEATURE
+"Podrían permitir personalizar el texto de confirmación",FEATURE
+"Me gustaría recibir una alerta antes de vencer un plazo",FEATURE
+"Necesitamos ver solicitudes relacionadas en una misma pantalla",FEATURE
+"Sería práctico incluir una función para fusionar tickets duplicados",FEATURE
+"Quiero poder ordenar los reportes por equipo y prioridad",FEATURE
+"Podrían agregar un botón para crear solicitudes desde el panel",FEATURE
+"Sería útil permitir la carga de archivos arrastrando y soltando",FEATURE
+"Solicito una función para buscar dentro de los comentarios",FEATURE
+"Nos gustaría tener un resumen semanal de rendimiento",FEATURE
+"Me gustaría elegir qué notificaciones recibir",FEATURE
+"Detectamos una inyección SQL en el formulario de búsqueda",SECURITY
+"Un usuario desconocido accedió a una cuenta sin autorización",SECURITY
+"El reporte expone datos personales de otros clientes",SECURITY
+"Se filtraron credenciales de acceso en un registro público",SECURITY
+"El certificado SSL del portal está vencido",SECURITY
+"Encontramos una vulnerabilidad XSS en los comentarios",SECURITY
+"Hay una brecha de seguridad que expuso correos de clientes",SECURITY
+"El sistema permite consultar registros de otra organización",SECURITY
+"Recibimos alertas de múltiples accesos desde ubicaciones sospechosas",SECURITY
+"Un archivo adjunto contiene un posible programa malicioso",SECURITY
+"La API está mostrando claves privadas en sus respuestas",SECURITY
+"Un empleado recibió un mensaje de phishing con nuestra marca",SECURITY
+"Detectamos una sesión activa que el usuario no reconoce",SECURITY
+"La base de datos quedó expuesta a internet sin autenticación",SECURITY
+"Una cuenta administrativa presenta actividad no autorizada",SECURITY
+"El formulario permite ejecutar código enviado por un usuario",SECURITY
+"Se publicaron tokens de acceso en un repositorio abierto",SECURITY
+"La aplicación revela datos sensibles en mensajes de error",SECURITY
+"Un atacante intentó modificar permisos de otras cuentas",SECURITY
+"Un certificado de firma digital fue comprometido",SECURITY
+"El panel permite descargar información personal sin autorización",SECURITY
+"Hay indicios de exfiltración de archivos confidenciales",SECURITY
+"Detectamos una vulnerabilidad de control de acceso en la API",SECURITY
+"Un usuario puede ver facturas de clientes ajenos",SECURITY
+"La configuración actual permite conexiones inseguras",SECURITY
+"Se detectó malware en una estación conectada al sistema",SECURITY
+"El enlace de recuperación permite acceder a otra cuenta",SECURITY
+"Un token de sesión fue reutilizado desde un dispositivo desconocido",SECURITY
+"La página está expuesta a falsificación de solicitudes CSRF",SECURITY
+"Se encontraron contraseñas almacenadas sin protección adecuada",SECURITY
+"Un usuario externo obtuvo privilegios de administrador",SECURITY
+"La aplicación permite inyectar comandos en una consulta",SECURITY
+"Se filtraron datos personales mediante un endpoint público",SECURITY
+"El certificado de seguridad vence hoy y el servicio sigue aceptando conexiones",SECURITY
+"Un desconocido entró a una cuenta ajena sin autorización",SECURITY
+"Una cuenta fue tomada tras el robo de sus credenciales",SECURITY
+"El almacenamiento público contiene copias de documentos privados",SECURITY
+"Hay una vulnerabilidad crítica en el componente de carga de archivos",SECURITY
+"El registro del servidor muestra intentos de acceso no autorizado",SECURITY
+"Detectamos una fuga de información en la respuesta de búsqueda",SECURITY
+"Un enlace compartido permite acceder a documentos confidenciales",SECURITY
+"Se está utilizando una versión vulnerable de la biblioteca de cifrado",SECURITY
+"Un tercero modificó datos sin contar con permisos",SECURITY
+"La API acepta un token expirado y permite consultar información",SECURITY
+"Se detectó tráfico sospechoso intentando explotar una falla del sistema",SECURITY
+"Un usuario recibió acceso a una cuenta que no le pertenece",SECURITY
+"La copia de seguridad contiene datos sensibles sin cifrado",SECURITY
+"Hay una vulnerabilidad que permite cambiar el rol de otro usuario",SECURITY
+"Se reportó una posible brecha que afecta información financiera",SECURITY
+"Las claves privadas del servicio aparecieron en los registros",SECURITY
